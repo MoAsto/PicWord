@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#eaf7f8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a1a1d" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="単語帳">
+<title>単語帳</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11.2L12 4l8 7.2V19a1.5 1.5 0 0 1-1.5 1.5H15v-5.5H9v5.5H5.5A1.5 1.5 0 0 1 4 19z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-cards" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 10h8M8 14h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M5 20V11M12 20V5M19 20v-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19l-4 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5v5M12 16v.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 16.9 6.8 19.7l1-5.9L3.5 9.7l5.9-.8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v15H5.5A1.5 1.5 0 0 0 4 20.5zM20 5.5A1.5 1.5 0 0 0 18.5 4H13v15h5.5a1.5 1.5 0 0 1 1.5 1.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+</svg>
+
+<!-- ============ ホーム ============ -->
+<section id="v-home" class="view active">
+  <header class="topbar">
+    <h1>単語帳</h1>
+    <button id="syncChip" class="chip" type="button"></button>
+    <button id="btnSettings" class="icon-btn" type="button" aria-label="設定"><svg class="ic"><use href="#i-gear"/></svg></button>
+  </header>
+  <div id="banner"></div>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow">今日の復習予定</div>
+      <div class="hero-num"><span id="tDue">0</span><span class="unit">語</span></div>
+      <div class="hero-sub" id="heroSub"></div>
+    </div>
+    <button class="btn sun lg" id="btnStart" type="button">学習をはじめる</button>
+  </section>
+
+  <section class="stats">
+    <div class="stat"><span class="ico"><svg class="ic"><use href="#i-pencil"/></svg></span><div class="num" id="tToday">0</div><div class="lbl">今日学習した単語</div></div>
+    <div class="stat"><span class="ico sun"><svg class="ic"><use href="#i-alert"/></svg></span><div class="num" id="tOver">0</div><div class="lbl">復習が必要<span class="lbl-note">（期限切れ）</span></div></div>
+    <div class="stat"><span class="ico"><svg class="ic"><use href="#i-star"/></svg></span><div class="num" id="tMaster">0</div><div class="lbl">覚えた単語</div></div>
+    <div class="stat"><span class="ico"><svg class="ic"><use href="#i-book"/></svg></span><div class="num" id="tTotal">0</div><div class="lbl">全登録単語</div></div>
+  </section>
+
+  <div class="shortcuts">
+    <button class="shortcut" id="goWords" type="button">
+      <span class="sc-ic"><svg class="ic"><use href="#i-cards"/></svg></span>
+      <span class="sc-t">単語の管理</span><span class="sc-s">追加・編集・削除</span>
+    </button>
+    <button class="shortcut" id="goStatus" type="button">
+      <span class="sc-ic alt"><svg class="ic"><use href="#i-chart"/></svg></span>
+      <span class="sc-t">学習状況</span><span class="sc-s">正解率・履歴</span>
+    </button>
+  </div>
+</section>
+
+<!-- ============ 学習設定 ============ -->
+<section id="v-setup" class="view">
+  <header class="topbar">
+    <button class="back" data-go="home" type="button"><svg class="ic"><use href="#i-back"/></svg>戻る</button>
+  </header>
+  <h1 class="page-title">学習の設定</h1>
+
+  <div class="card list-card">
+    <div class="opt">
+      <div><div class="opt-t">答えに日本語訳も表示</div><div class="sub">オフの場合、答えは画像だけを表示します</div></div>
+      <label class="switch"><input type="checkbox" id="optJa"><span class="knob"></span></label>
+    </div>
+    <div class="opt">
+      <div><div class="opt-t">復習も出題する</div><div class="sub">期限が来た単語・間違えた単語を先に出題します</div></div>
+      <label class="switch"><input type="checkbox" id="optRev"><span class="knob"></span></label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="opt-t">新しく学ぶ単語数</div>
+    <div class="stepper">
+      <button type="button" id="newMinus" aria-label="減らす"><svg class="ic"><use href="#i-minus"/></svg></button>
+      <input id="optNew" type="number" min="0" max="500" inputmode="numeric" aria-label="新しく学ぶ単語数">
+      <button type="button" id="newPlus" aria-label="増やす"><svg class="ic"><use href="#i-plus"/></svg></button>
+    </div>
+    <div class="chips" id="newChips">
+      <button type="button" class="chip-btn" data-n="5">5</button>
+      <button type="button" class="chip-btn" data-n="10">10</button>
+      <button type="button" class="chip-btn" data-n="20">20</button>
+      <button type="button" class="chip-btn" data-n="30">30</button>
+    </div>
+  </div>
+
+  <p id="setupInfo" class="setup-info"></p>
+  <button class="btn primary lg" id="btnGo" type="button">スタート</button>
+</section>
+
+<!-- ============ 学習 ============ -->
+<section id="v-study" class="view study">
+  <header class="st-head">
+    <button class="icon-btn quiet" id="stClose" type="button" aria-label="学習を終了"><svg class="ic"><use href="#i-close"/></svg></button>
+    <div class="prog" role="progressbar"><div id="progBar"></div></div>
+    <span id="progTxt"></span>
+  </header>
+  <main class="st-main" id="stMain">
+    <div id="stWord" class="big-word"></div>
+    <div id="stAns" class="ans hidden">
+      <div class="img-wrap" id="imgWrap">
+        <img id="stImg" alt="答えの画像" referrerpolicy="no-referrer">
+        <div id="stImgErr" class="img-err hidden"></div>
+      </div>
+      <div id="stJa" class="ja hidden"></div>
+    </div>
+  </main>
+  <footer class="st-foot">
+    <div id="stChoose" class="two">
+      <button class="btn ng" id="btnNg" type="button">分からない</button>
+      <button class="btn ok" id="btnOk" type="button">分かる</button>
+    </div>
+    <button id="btnNext" class="btn primary hidden" type="button">次へ</button>
+  </footer>
+</section>
+
+<!-- ============ 学習完了 ============ -->
+<section id="v-done" class="view">
+  <div class="done">
+    <div class="done-mark"><svg class="ic"><use href="#i-check"/></svg></div>
+    <h1 class="page-title center">学習完了</h1>
+    <p class="sub center">おつかれさまでした</p>
+    <div class="stats three">
+      <div class="stat"><div class="num" id="dDone">0</div><div class="lbl">完了した単語</div></div>
+      <div class="stat"><div class="num" id="dOk">0</div><div class="lbl">分かる</div></div>
+      <div class="stat"><div class="num" id="dNg">0</div><div class="lbl">分からない</div></div>
+    </div>
+    <button class="btn primary lg" id="dHome" type="button">ホームへ</button>
+    <button class="btn lg" id="dAgain" type="button">続けて学習する</button>
+  </div>
+</section>
+
+<!-- ============ 学習状況 ============ -->
+<section id="v-status" class="view">
+  <header class="topbar">
+    <button class="back" data-go="home" type="button"><svg class="ic"><use href="#i-back"/></svg>ホーム</button>
+  </header>
+  <h1 class="page-title">学習状況</h1>
+  <div class="tabs" id="stTabs">
+    <button type="button" data-tab="overview" class="on">概要</button>
+    <button type="button" data-tab="words">単語</button>
+    <button type="button" data-tab="history">履歴</button>
+  </div>
+  <div id="stBody"></div>
+</section>
+
+<!-- ============ 単語管理 ============ -->
+<section id="v-words" class="view">
+  <header class="topbar">
+    <button class="back" data-go="home" type="button"><svg class="ic"><use href="#i-back"/></svg>ホーム</button>
+  </header>
+  <h1 class="page-title">単語の管理</h1>
+  <div class="actions">
+    <button class="btn primary" id="wAdd" type="button"><svg class="ic"><use href="#i-plus"/></svg>単語を追加</button>
+    <button class="btn" id="wBulk" type="button">まとめて追加</button>
+  </div>
+  <div class="searchbar">
+    <input id="wSearch" type="search" placeholder="英単語・日本語で検索" autocapitalize="off" autocorrect="off" aria-label="検索">
+    <select id="wFilter" aria-label="絞り込み">
+      <option value="all">すべて</option>
+      <option value="new">未学習</option>
+      <option value="learning">学習中</option>
+      <option value="overdue">期限切れ</option>
+      <option value="mastered">習得済み</option>
+      <option value="noimg">画像なし</option>
+    </select>
+  </div>
+  <div id="wCount" class="count"></div>
+  <div id="wList" class="list"></div>
+  <button class="btn hidden" id="wMore" type="button">さらに表示</button>
+</section>
+
+<!-- ============ 設定 ============ -->
+<section id="v-settings" class="view">
+  <header class="topbar">
+    <button class="back" data-go="home" type="button"><svg class="ic"><use href="#i-back"/></svg>ホーム</button>
+  </header>
+  <h1 class="page-title">設定</h1>
+
+  <h2 class="sec">Googleスプレッドシート連携</h2>
+  <div class="card">
+    <p class="sub lead">Apps Script をデプロイして得られたURLと合言葉（TOKEN）を入力します。入力内容はこの端末の中だけに保存されます。手順は README.md を参照してください。</p>
+    <label class="fld">Apps Script のウェブアプリURL
+      <input id="cfgUrl" type="url" inputmode="url" placeholder="https://script.google.com/macros/s/…/exec" autocapitalize="off" autocorrect="off" spellcheck="false">
+    </label>
+    <label class="fld">合言葉（TOKEN）
+      <input id="cfgToken" type="password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+    </label>
+    <div class="two">
+      <button class="btn primary" id="cfgSave" type="button">保存して接続</button>
+      <button class="btn" id="cfgTest" type="button">接続テスト</button>
+    </div>
+    <p id="cfgInfo" class="sub status-line"></p>
+  </div>
+
+  <h2 class="sec">データの操作</h2>
+  <div class="card list-card">
+    <button class="menu-row" id="cfgSync" type="button"><span>今すぐ同期</span><svg class="ic"><use href="#i-next"/></svg></button>
+    <button class="menu-row" id="cfgUploadAll" type="button"><span>この端末のデータを全て送信</span><svg class="ic"><use href="#i-next"/></svg></button>
+    <button class="menu-row" id="cfgRefetch" type="button"><span>サーバーから全て再取得</span><svg class="ic"><use href="#i-next"/></svg></button>
+    <button class="menu-row" id="bkExport" type="button"><span>バックアップを書き出す（JSON）</span><svg class="ic"><use href="#i-next"/></svg></button>
+    <label class="menu-row file"><span>バックアップを読み込む</span><svg class="ic"><use href="#i-next"/></svg><input type="file" id="bkImport" accept="application/json,.json" hidden></label>
+    <button class="menu-row danger" id="cfgDisconnect" type="button"><span>連携を解除</span><svg class="ic"><use href="#i-next"/></svg></button>
+  </div>
+
+  <h2 class="sec">復習のしくみ</h2>
+  <div class="card">
+    <p class="sub lead" style="margin:0">習熟度は Lv.0〜5。「分かる」で Lv が1つ上がり、翌日 → 3日後 → 7日後 → 14日後 → 30日後と間隔が延びます（以降は最大180日まで延長）。「分からない」だと Lv が2つ下がって当日の再出題対象になり、同じ学習中にも数枚後でもう一度出題されます。間違いが多い単語ほど間隔が短くなるよう自動調整します。</p>
+  </div>
+</section>
+
+<!-- ============ 単語の追加・編集 ============ -->
+<dialog id="dlgWord">
+  <div class="dlg">
+    <h2 id="dwTitle">単語を追加</h2>
+    <label class="fld">英単語
+      <input id="dwWord" autocapitalize="off" autocorrect="off" spellcheck="false">
+    </label>
+    <label class="fld">日本語訳（任意）
+      <input id="dwJa">
+    </label>
+    <div class="fld">答えの画像
+      <div id="dwPrev" class="prev"></div>
+      <div class="two">
+        <label class="btn small file">画像を選ぶ／撮影<input type="file" id="dwFile" accept="image/*" hidden></label>
+        <button type="button" class="btn small" id="dwClear">画像を削除</button>
+      </div>
+      <input id="dwUrl" type="url" inputmode="url" placeholder="または画像のURL／Googleドライブの共有リンク" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="画像のURL">
+      <div class="hint">貼り付け（Ctrl/⌘+V）でも画像を登録できます。</div>
+    </div>
+    <p id="dwMsg" class="msg"></p>
+    <div class="two">
+      <button type="button" class="btn" id="dwCancel">キャンセル</button>
+      <button type="button" class="btn primary" id="dwSave">保存</button>
+    </div>
+    <div class="dw-extra" id="dwExtra">
+      <button type="button" class="link-btn" id="dwReset">学習記録をリセット</button>
+      <button type="button" class="link-btn danger" id="dwDelete">この単語を削除</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- ============ まとめて追加 ============ -->
+<dialog id="dlgBulk">
+  <div class="dlg">
+    <h2>まとめて追加</h2>
+    <p class="sub lead">1行に1語。「英単語,日本語訳」の形式（カンマ／タブ区切り、日本語訳は省略可）。画像はあとから各単語の編集画面で登録できます。</p>
+    <textarea id="bkText" rows="9" placeholder="apple,りんご&#10;banana,バナナ&#10;cherry"></textarea>
+    <div class="two">
+      <button type="button" class="btn" id="bkCancel">キャンセル</button>
+      <button type="button" class="btn primary" id="bkAdd">追加</button>
+    </div>
+  </div>
+</dialog>
+
+<nav class="tabbar" id="tabbar" aria-label="メインメニュー">
+  <div class="nav-brand"><span class="logo"></span>単語帳</div>
+  <button type="button" data-go="home"><span class="ti"><svg class="ic"><use href="#i-home"/></svg></span><span class="tl">ホーム</span></button>
+  <button type="button" data-go="words"><span class="ti"><svg class="ic"><use href="#i-cards"/></svg></span><span class="tl">単語</span></button>
+  <button type="button" data-go="status"><span class="ti"><svg class="ic"><use href="#i-chart"/></svg></span><span class="tl">学習状況</span></button>
+  <button type="button" data-go="settings"><span class="ti"><svg class="ic"><use href="#i-gear"/></svg></span><span class="tl">設定</span></button>
+</nav>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<noscript><p style="padding:24px">このアプリはJavaScriptが必要です。</p></noscript>
+<script src="app.js"></script>
+</body>
+</html>
